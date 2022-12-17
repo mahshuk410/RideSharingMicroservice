@@ -4,11 +4,83 @@
 The ride-sharing application adopts a microservice architecture where each REST API represents a distinct microservice. They are broken into Driver API, Passenger API and Trips Management API.
 The driver API allows drivers to manage their account details(create and update), view assigned trips, start and end these trips. 
 Whereas the Passenger API allows users to register their Passenger Accounts, update their account details, request for trips from one destination to another as well as view their trip history.
-
+##
 
 ## Microservice Architecture Diagram
 ![Architecture-diagram](https://user-images.githubusercontent.com/73008987/208143360-123538d0-443e-42ca-af4a-983a1583f5af.png)
-A Component-based front-end is built for drivers and passengers. All communications to microservices will be made from the Driver and Passenger UI over RESTful APIs. The console UIs will be running on PowerShell/ Command Prompt Terminals. Each of the microservices were developed using the Golang. For each microservice, a REST API has been created. All the databases are developed using MySQL engine. 
+
+A Component-based front-end is built for drivers and passengers. All communications to microservices will be made from the Driver and Passenger UI over RESTful APIs. The console UIs will be running on PowerShell/ Command Prompt Terminals. Each of the microservices were developed using the Golang. For each microservice, a REST API has been created. All the databases are developed using MySQL engine.
+
+## Documentation
+### Domain
+![domain](https://user-images.githubusercontent.com/73008987/208224379-008b2021-ce8f-407c-a40b-7c19df7934b8.png)
+
+The domain of the application developed is a Ride-Sharing Platform. The Ride Sharing Platform domain can be separated into 3, loosely coupled sub-domains known as the Driver Management, Passenger Management and Trip Management. The main users for this application are Drivers and Passengers.
+
+### Glossary
+Definitions of terminologies widely used in the sub-domains of this application.
+
+- Passenger – An application user requesting for a Ride-Sharing trip to travel from one destination to another.
+- Driver – An application user who owns a vehicle, using it to transport passengers from one destination to another. 
+- Trip – A journey requested by the passenger from one source to a destination location allocated to a driver. 
+
+
+### Sub-Domains
+
+Having identified the 3 domains, each of them are supported by a back-end microservice each that supports the functionalities of the Ride Sharing Application.
+
+**1. Driver Management Sub-Domain**
+-	Supports the Driver Account Creation process. Each driver registering on the platform has to enter his first name, last name, mobile number, email address, identification number and car license number. 
+-	All the above-mentioned credentials (except Identification Number) can be updated.
+-	Driver accounts cannot be deleted.
+
+**2. Passenger Management Sub-Domain**
+-	Supports the Passenger account creation process. Every passenger registering has to enter his, first name, last name, mobile number, and email address.
+-	Any of the above-mentioned passenger credentials can be updated.
+-	Similarly, no passenger account can be deleted.
+
+**3. Trip Management Sub-Domain**
+-	Applicable for both Drivers and Passengers.
+-	Passenger can request for a trip by inputting postal codes of pick-up and drop-off location.
+-	An available driver, not driving any passenger, will be assigned one trip requested at any one time. 
+-	Driver has ability to initiate start trip and end trip.
+-	Passenger can retrieve his trip history in reverse chronological order (latest order first).
+
+### Context Map
+
+![contextMap](https://user-images.githubusercontent.com/73008987/208224523-87241674-9596-4afa-b73a-11700b5dd005.png)
+
+From the 3 subdomains identified, they have been broken down into 3 bounded contexts. The driver Account Management context is responsible for passing the details to the Trips Allocation bounded context for allocating a particular Trip ID to the Car Driver. Whereas for the Passenger Account Management context, it is responsible for passing the Passenger Name and Id to the Trip Allocation context to authorise the passenger as well as to associate a new trip to the Passenger Id. As the passenger needs to retrieve his trip history, the “Trip History Retrieval” feature highly depends on the Trips Allocation feature to log every completed trip.  Due to the tightly coupled dependency, these 2 features are identified to be in the Trip Management bounded context. The arrowhead lines define that communications between the bounded contexts will be sent over APIs.
+
+### Bounded Contexts
+**Domain Model for Passenger Account Management** 
+
+![passenger_domain_model](https://user-images.githubusercontent.com/73008987/208224731-a02dd57c-6a37-436c-9e01-112292f96a70.png)
+
+**Domain Model for Driver Account Management** 
+
+![driver_domain_model](https://user-images.githubusercontent.com/73008987/208224755-a057599e-e6c3-4424-a039-0268a2a3dbfb.png)
+
+**Domain Model for Trip Management** 
+
+![trip_domain_model](https://user-images.githubusercontent.com/73008987/208224771-190bea8a-6637-4289-afe8-2ad7aad7b4fb.png)
+
+### Entities and Aggregates
+
+**Passenger Management Sub-Domain**
+
+![passenger_class](https://user-images.githubusercontent.com/73008987/208224823-5c71e61a-67ae-459b-a6d6-f12094a77009.png)
+
+**Driver Management Sub-Domain**
+
+![driver_class](https://user-images.githubusercontent.com/73008987/208224841-a107feb1-0bb1-4dd4-bac8-a50c9e4950b1.png)
+
+**Trips Management Sub-Domain**
+
+![complete_class_diagram](https://user-images.githubusercontent.com/73008987/208224851-5b1f4c0c-d3f6-48fb-9d28-6d3a6209e0c7.png)
+
+One trip is requested by a passenger and driven by a driver. 1 driver and 1 passenger can drive and request multiple trips respectively. Only the PassengerId and DriverId are sent over APIs to associate the trip records with the Driver and Passenger respectively.
+
 
 ## Setting Up Microservices
 1.	Download and Execute the MySQL Database Script 
