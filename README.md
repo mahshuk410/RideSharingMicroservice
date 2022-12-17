@@ -388,10 +388,10 @@ API Request
 Driver can either Start or End the Trip. Valid DriverId and corresponding tripId is required.
 
 ```bash
-curl -X PUT "http://localhost:5003/api/v1/trips/driver/{driverId}/{tripId}" --data '**{Status:Started}**'-H'Content-Type:application/json'
+curl -X PUT "http://localhost:5003/api/v1/trips/driver/{driverId}/{tripId}" --data '{Status:Started}'-H'Content-Type:application/json'
 ```
 ```bash
-curl -X PUT "http://localhost:5003/api/v1/trips/driver/{driverId}/{tripId}" --data '**{Status:Ended}**'-H'Content-Type:application/json'
+curl -X PUT "http://localhost:5003/api/v1/trips/driver/{driverId}/{tripId}" --data '**{Status:Ended}'-H'Content-Type:application/json'
 ```
 
 API Response
