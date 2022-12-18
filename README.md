@@ -325,7 +325,12 @@ Passenger with the mobile number not found
 ```bash
 Passenger with the email address not found
 ```
+**3. Get Passenger Details**
+API Request
 
+Passenger view his own details before update or driver view passenger details upong receiving trip request
+
+API Response
 ### Trip Management API
 
 API Endpoint: http://localhost:5003
