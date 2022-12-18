@@ -7,9 +7,11 @@ Whereas the Passenger API allows users to register their Passenger Accounts, upd
 ##
 
 ## Microservice Architecture Diagram
-![Architecture-diagram](https://user-images.githubusercontent.com/73008987/208143360-123538d0-443e-42ca-af4a-983a1583f5af.png)
+![Architecture_diagram](https://user-images.githubusercontent.com/73008987/208305306-f6cdcb20-371b-4cbe-a377-40f19f85de0c.JPG)
 
-A Component-based front-end is built for drivers and passengers. All communications to microservices will be made from the Driver and Passenger UI over RESTful APIs. The console UIs will be running on PowerShell/ Command Prompt Terminals. Each of the microservices were developed using the Golang. For each microservice, a REST API has been created. All the databases are developed using MySQL engine.
+
+A Component-based front-end is built to separate the User Interfaces of drivers and passengers and prevent single point of failure, such that the driver and passenger services will be running in parallel. All communications to microservices will be made from the Driver and Passenger UI over RESTful APIs. The console UIs will be running on PowerShell/ Command Prompt Terminals. Each of the microservices were developed using the Golang. For each microservice, a REST API has been created. Each database supports each distinctive microservice. All the databases are developed using MySQL Database engine.
+
 
 ## Documentation
 ### Domain
@@ -328,9 +330,51 @@ Passenger with the email address not found
 **3. Get Passenger Details**
 API Request
 
-Passenger view his own details before update or driver view passenger details upong receiving trip request
+Passenger view his own details before update or driver view passenger details upon receiving trip request.
+Valid Passenger record returns a 200 OK status. Invalid Passenger Records returns a 404 NOT FOUND error.
+Option 1: Retrieve passenger details by PassengerId 
+```bash
+curl -X GET "http://localhost:5000/api/v1/passenger/details?passengerId=5" 
+-H 'Content-Type: application/json'
+```
 
 API Response
+
+```code
+{
+    "Passenger Record": {
+        "Email Address": "dsfsdff@gmail.com",
+        "First Name": "the",
+        "Last Name": "fish",
+        "Mobile Number": "90125456"
+    }
+}
+```
+Option 2: Retrieve Passenger Details with Email Address or Mobile Number
+
+```bash
+curl -X GET "http://localhost:5000/api/v1/passenger/details?mobileNo=90125456" 
+-H 'Content-Type: application/json'
+```
+
+```bash
+curl -X GET "http://localhost:5000/api/v1/passenger/details?emailAddress=dsfsdff@gmail.com"
+-H 'Content-Type: application/json'
+```
+API Response
+
+```code
+{
+    "Passenger Record": {
+        "Passenger Id": 5,
+        "First Name": "the",
+        "Last Name": "fish",
+        "Mobile Number": "90125456",
+        "Email Address": "dsfsdff@gmail.com"
+    }
+}
+```
+
 ### Trip Management API
 
 API Endpoint: http://localhost:5003
