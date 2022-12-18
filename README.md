@@ -122,6 +122,7 @@ NOTE: Open all the above-mentioned go files from the folder level to import all 
 ### Driver API
 API Endpoint: http://localhost:5002
 Sample Driver Object in JSON 
+
 ![Driver](https://user-images.githubusercontent.com/73008987/208151298-b51aea93-c94e-432e-a8cf-987d578e20cc.png)
 
 | **Propetry**   | **Description**                                                                                         |
@@ -191,7 +192,7 @@ curl – X PUT http://localhost:5002/api/v1/driver?emailAddress={existingEmailAd
 
 Note: Driver account’s Identification Number cannot be updated
 
-> The * symbol denotes the details to remain unchanged by user.
+> The * symbol denotes the details to remain unchanged by driver.
 
 API Response
 
@@ -309,7 +310,7 @@ curl -X PUT “http://localhost:5000/api/v1/passenger?emailAddress={existingEmai
 }'
 – H 'Content-Type: application/json'
 ```
-> The * symbol denotes the details to be remained unchanged by user.
+> The * symbol denotes the details to be remained unchanged by passenger.
 
 API Response
 
