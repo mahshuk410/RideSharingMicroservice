@@ -226,6 +226,29 @@ Returns a 200 OK status with driver IDs
   ]
 }
 ```
+
+**4. Get Specific Driver Details**
+
+API Request
+Passengers can view driver details together with confirmed trip details.
+```bash 
+curl -X GET "http://localhost:5002/api/v1/driver/{driverId}"
+-H "Content-Type: application/json"
+```
+
+API Response
+Valid Driver Id Found returns a 200 OK response, invalid Driver Id returns 404 Not Found
+
+```code
+{
+    "First Name": "panda",
+    "Last Name": "cat",
+    "Mobile Number": "94632345",
+    "Email Address": "pc@gmail.com",
+    "Identification No": "",
+    "Car License No": "FY8823D"
+}
+```
 ### Passenger API
 
 API Endpoint - http://localhost:5000
@@ -328,9 +351,7 @@ Sends a new Trip object, communicates to the Driver API to assign an available d
 curl -X POST "http://localhost:5003/api/v1/trips/passenger/{passengerId}"
 --data '{
     "From":452987,
-    "To":522619,
-    "Trip Status":”Pending”,
-    "Passenger Id":5
+    "To":522619
 }'
 -H'Content-Type:application/json'
 ```
@@ -338,8 +359,17 @@ curl -X POST "http://localhost:5003/api/v1/trips/passenger/{passengerId}"
 API Response
 
 ```code
-"Created Trip":{
-  //trip object
+{
+    "Created Trip": {
+        "Trip Id": 32,
+        "From": 452987,
+        "To": 522619,
+        "Trip Status": "Pending",
+        "Start Time": "",
+        "End Time": "",
+        "Passenger Id": 3,
+        "Driver Id": 6
+    }
 }
 ```
 
@@ -358,8 +388,49 @@ API Response
 Returns a 200 OK. Error 404 denotes passenger has not made any rides.
 
 ```code
-Trips: {
-	//
+{
+    "Trips": [
+        {
+            "Trip Id": 28,
+            "From": 436534,
+            "To": 224455,
+            "Trip Status": "Ended",
+            "Start Time": "2022-12-17 19:32:04",
+            "End Time": "2022-12-17 19:33:00",
+            "Passenger Id": 0,
+            "Driver Id": 1
+        },
+        {
+            "Trip Id": 24,
+            "From": 452987,
+            "To": 522619,
+            "Trip Status": "Ended",
+            "Start Time": "2022-12-17 19:31:46",
+            "End Time": "2022-12-17 19:31:52",
+            "Passenger Id": 0,
+            "Driver Id": 1
+        },
+        {
+            "Trip Id": 21,
+            "From": 346433,
+            "To": 666644,
+            "Trip Status": "Ended",
+            "Start Time": "2022-12-17 15:46:33",
+            "End Time": "2022-12-17 15:47:14",
+            "Passenger Id": 0,
+            "Driver Id": 4
+        },
+        {
+            "Trip Id": 32,
+            "From": 452987,
+            "To": 522619,
+            "Trip Status": "Pending",
+            "Start Time": "",
+            "End Time": "",
+            "Passenger Id": 0,
+            "Driver Id": 0
+        }
+    ]
 }
 ```
 
@@ -378,7 +449,14 @@ curl -X GET "http://localhost:5003/api/v1/trips/driver/{driverId}" -H 'Content-T
 Example Response
 ```code
 {
-	//
+    "Trip Id": 32,
+    "From": 452987,
+    "To": 522619,
+    "Trip Status": "Pending",
+    "Start Time": "",
+    "End Time": "",
+    "Passenger Id": 3,
+    "Driver Id": 6
 }
 ```
 **4.  Driver Updates the Trip Status**
