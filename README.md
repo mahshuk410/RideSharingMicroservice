@@ -85,8 +85,8 @@ One trip is requested by a passenger and driven by a driver. 1 driver and 1 pass
 
 
 ## Setting Up Microservices
-1.	Download and Execute the MySQL Database Script 
-2.	Download and Execute the driver-service.go, passenger-service.go and trip-service.go.
+1.	Download and Execute the [MySQL Database Scripts](https://github.com/mahshuk410/RideSharingMicroservice/tree/main/Database%20Scripts) on MySQL Workbench
+2.	Download and Execute the [driver-service.go](https://github.com/mahshuk410/RideSharingMicroservice/tree/main/Microservice%20Backend/Driver%20Microservice), [passenger-service.go](https://github.com/mahshuk410/RideSharingMicroservice/tree/main/Microservice%20Backend/Passenger%20Microservice) and [trip-service.go](https://github.com/mahshuk410/RideSharingMicroservice/tree/main/Microservice%20Backend/Trip%20Microservice).
 NOTE: Run all of these microservices simultaneously on separate VS code/PowerShell/command prompt terminals
 NOTE: Open all the above-mentioned go files from the folder level to import all module dependencies. 
 3.	Allow the firewall connections through ports when prompted by Windows Firewall Security:  
@@ -98,7 +98,7 @@ NOTE: Open all the above-mentioned go files from the folder level to import all 
 | 5003 | Trip Microservice      |
 
 
-4.	Download and execute the Driver.go and Passenger.go console files.
+4.	Download and execute the [Driver.go](https://github.com/mahshuk410/RideSharingMicroservice/tree/main/Application%20Console/Driver%20Client) and [Passenger.go](https://github.com/mahshuk410/RideSharingMicroservice/tree/main/Application%20Console/Passenger%20Client) console files.
 NOTE: Open all the above-mentioned go files from the folder level to import all module dependencies. 
 5.	Tools Required: 
  -  Postman – Test the APIs
