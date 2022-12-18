@@ -3,4 +3,5 @@ go 1.19
 use (
 	"./Driver Microservice"
 	"./Passenger Microservice"
+	"./Trip Microservice"
 )
